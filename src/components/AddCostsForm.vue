@@ -1,0 +1,102 @@
+<template>
+  <form @submit.prevent="sendForm" class="form-costs">
+    <h3>Введите транзакцию:</h3>
+    <input
+      v-model="paymentDiscription"
+      class="form-costs__input"
+      type="text"
+      placeholder="Описание расхода"
+    />
+    <input
+      v-model.number="paymentAmount"
+      class="form-costs__input"
+      type="text"
+      placeholder="Сумма расхода"
+    />
+    <input v-model="paymentDate" class="form-costs__input" type="date" />
+    <div class="form-costs__button-block">
+      <my-button class="form-costs__button">Создать запись</my-button>
+    </div>
+  </form>
+</template>
+
+
+<script>
+import MyButton from "./UI/MyButton.vue";
+export default {
+  components: { MyButton },
+  name: "AddCostsForm",
+  data() {
+    return {
+      paymentDiscription: "",
+      paymentAmount: null,
+      paymentDate: "",
+    };
+  },
+
+  computed: {
+    getDate() {
+      if (this.paymentDate) {
+        return this.paymentDate;
+      } else {
+        const today = new Date();
+        const d = this.addLeadingZeroInDate(today.getDate());
+        const m = this.addLeadingZeroInDate(today.getMonth() + 1);
+        const y = today.getFullYear();
+        return `${y}-${m}-${d}`;
+      }
+    },
+  },
+
+  methods: {
+    sendForm() {
+      if (!this.paymentDiscription || !this.paymentAmount) {
+        return;
+      }
+      this.$emit(
+        "getPaymentForm",
+        this.paymentDiscription,
+        this.paymentAmount,
+        this.getDate
+      );
+      this.paymentDiscription = "";
+      this.paymentAmount = null;
+      this.paymentDate = "";
+    },
+
+    addLeadingZeroInDate(d) {
+      return d < 10 ? "0" + d : d;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.form-costs {
+  width: 450px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid black;
+    background-color: rgb(202, 180, 150);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+  }
+
+  &__button-block {
+    align-self: flex-end;
+  }
+
+  &__button {
+    color: burlywood;
+    margin-top: 15px;
+    background-color: rgb(128, 43, 43);
+  }
+}
+</style>
