@@ -1,5 +1,5 @@
 // import AddCosts from "@/pages/AddCosts"
-import AddCostsForm from "@/components/AddCostsForm"
+import AddCostsAuto from "@/pages/AddCostsAuto"
 // import Page404 from "@/pages/Page404"
 
 import { createRouter } from "vue-router"
@@ -11,8 +11,8 @@ import { createWebHashHistory } from "vue-router"
 const routes = [
     {
         path: "/add/payment/Food?value=:value",
-        name: "AddCostsForm",
-        component: AddCostsForm
+        name: "AddCostsAuto",
+        component: AddCostsAuto
     },
 
 

@@ -24,11 +24,9 @@
           >
         </div>
 
-        <router-link :to="{ name: 'AddCostsForm', params: { value } }"
-          ><div class="link">
-            Добавить платеж категории Food с ценой 200
-          </div></router-link
-        >
+        <div @click="$router.push({ name: 'AddCostsAuto', params: { value } })">
+          Добавить платеж категории Food с ценой 200
+        </div>
 
         <main>
           <payments-display></payments-display>
@@ -102,6 +100,11 @@ export default {
       getShowFormAddCosts: "expenses/getShowFormAddCosts",
       getCurrentFetchNumberOfPage: "expenses/getCurrentFetchNumberOfPage",
     }),
+  },
+
+  mounted() {
+    console.log(this.$route.query);
+    console.log(this.$route.params);
   },
 
   created() {
