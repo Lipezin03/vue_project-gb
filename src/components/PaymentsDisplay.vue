@@ -11,94 +11,50 @@
       </thead>
 
       <tbody>
-        <tr v-for="n in showTheNumberOfItems || showListSecond" :key="n">
-          <th scope="row">{{ n + startListShow }}</th>
+        <tr v-for="el in getShowCurrentList" :key="el.id">
+          <th scope="row">
+            {{ getShowCurrentList.indexOf(el) + 1 + getStartListShow }}
+          </th>
           <td>
-            {{ costsList[n - 1 + startListShow].date }}
+            {{ el.date }}
           </td>
           <td>
-            {{ costsList[n - 1 + startListShow].category }}
+            {{ el.category }}
           </td>
-          <td>{{ costsList[n - 1 + startListShow].value }}</td>
+          <td>
+            {{ el.value }}
+          </td>
         </tr>
       </tbody>
 
       <tfoot>
         <tr>
           <th scope="row" colspan="2">Общее число записей</th>
-          <td colspan="2">{{ countItem }}</td>
+          <td colspan="2">
+            {{ getCostsLength }}
+          </td>
         </tr>
       </tfoot>
     </table>
+    <div v-if="!getShowCurrentList.length > 0" class="message">
+      Список расходов пуст, загрузите данные с сервера или добавте свои
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "PaymentsDisplay",
-  props: {
-    costsList: {
-      type: Array,
-      defoult: () => [],
-      required: true,
-    },
-    numberOfPage: {
-      type: Number,
-      defoult: 1,
-      required: true,
-    },
-    countItem: {
-      type: Number,
-      defoult: 0,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      startListShow: 0,
-      frontier: 5,
-      showMainList: 5,
-      showListSecond: 0,
-      lengthList: this.costsList.length,
-    };
-  },
 
   methods: {},
 
   computed: {
-    showTheNumberOfItems() {
-      if (this.lengthList < this.showMainList) {
-        return this.lengthList;
-      } else {
-        return this.showMainList;
-      }
-    },
-  },
-  beforeUpdate() {
-    this.showMainList = 5;
-
-    if (this.numberOfPage === 1) {
-      this.startListShow = 0;
-      this.frontier = 5;
-    } else {
-      const finalFrontier = this.showMainList * this.numberOfPage;
-
-      this.frontier = finalFrontier;
-
-      this.startListShow = this.frontier - this.showMainList;
-
-      let currentArrLengthShow = this.costsList.filter((el, idx) => {
-        return idx + 1 > this.startListShow && idx + 1 <= this.frontier;
-      });
-
-      if (currentArrLengthShow.length === 5) {
-        this.showMainList = 5;
-      } else {
-        this.showListSecond = currentArrLengthShow.length;
-
-        this.showMainList = 0;
-      }
-    }
+    ...mapGetters({
+      getCostsLength: "expenses/getCostsLength",
+      getShowCurrentList: "expenses/getShowCurrentList",
+      getStartListShow: "expenses/getStartListShow",
+    }),
   },
 };
 </script>
@@ -106,6 +62,10 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   height: 100%;
+}
+.message {
+  color: brown;
+  font-size: 32px;
 }
 
 table {

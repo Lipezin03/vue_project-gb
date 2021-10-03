@@ -1,22 +1,23 @@
 <template>
-  <div v-if="show" @click="hidenModal" class="modal-block">
+  <div @click="hidenModal" class="modal-block">
     <div @click.stop class="modal-block__content"><slot></slot></div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "MyModal",
-  props: {
-    show: {
-      type: Boolean,
-      required: false,
-    },
-  },
 
   methods: {
+    ...mapMutations({
+      changeShowFormAddCategory: "expenses/changeShowFormAddCategory",
+      changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
+    }),
+
     hidenModal() {
-      this.$emit("update:show", false);
+      this.changeShowFormAddCategory(false);
+      this.changeShowFormAddCosts(false);
     },
   },
 };

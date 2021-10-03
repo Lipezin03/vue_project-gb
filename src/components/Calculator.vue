@@ -212,6 +212,7 @@ export default {
 
     deleteSymbolOnKeyboard() {
       if (this.radioPositoinKeyboard === "writeOperand1") {
+        this.isValueButtonKeyboardInput1 = this.operand1.toString().split("");
         let count = "";
 
         let currentNumber = this.isValueButtonKeyboardInput1.slice(
@@ -224,8 +225,9 @@ export default {
         currentNumber.forEach((el) => (count += el));
 
         this.operand1 = count;
-        console.log(this.operand1);
       } else if (this.radioPositoinKeyboard === "writeOperand2") {
+        this.isValueButtonKeyboardInput2 = this.operand2.toString().split("");
+
         let count = "";
 
         let currentNumber = this.isValueButtonKeyboardInput2.slice(

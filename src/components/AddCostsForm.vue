@@ -1,12 +1,12 @@
 <template>
   <form @submit.prevent="sendForm" class="form-costs">
     <h3>Введите транзакцию:</h3>
-    <input
-      v-model="paymentDiscription"
-      class="form-costs__input"
-      type="text"
-      placeholder="Описание расхода"
-    />
+
+    <select v-model="paymentDiscription" class="form-costs__input">
+      <option v-for="option in getCategoryList" :value="option" :key="option">
+        {{ option }}
+      </option>
+    </select>
     <input
       v-model.number="paymentAmount"
       class="form-costs__input"
@@ -23,6 +23,7 @@
 
 <script>
 import MyButton from "./UI/MyButton.vue";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: { MyButton },
   name: "AddCostsForm",
@@ -35,6 +36,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      getCategoryList: "expenses/getCategoryList",
+    }),
+
     getDate() {
       if (this.paymentDate) {
         return this.paymentDate;
@@ -49,16 +54,31 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      loadCategories: "expenses/loadCategories",
+    }),
+
+    ...mapMutations({
+      addDataToCostssList: "expenses/addDataToCostssList",
+      changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
+    }),
+
     sendForm() {
       if (!this.paymentDiscription || !this.paymentAmount) {
         return;
       }
-      this.$emit(
-        "getPaymentForm",
-        this.paymentDiscription,
-        this.paymentAmount,
-        this.getDate
-      );
+
+      const payment = [
+        {
+          id: Date.now(),
+          date: this.getDate,
+          category: this.paymentDiscription,
+          value: this.paymentAmount,
+        },
+      ];
+      this.addDataToCostssList(payment);
+      this.changeShowFormAddCosts(false);
+
       this.paymentDiscription = "";
       this.paymentAmount = null;
       this.paymentDate = "";
@@ -67,6 +87,12 @@ export default {
     addLeadingZeroInDate(d) {
       return d < 10 ? "0" + d : d;
     },
+  },
+
+  mounted() {
+    if (!this.getCategoryList.length) {
+      this.loadCategories();
+    }
   },
 };
 </script>
@@ -94,9 +120,11 @@ export default {
   }
 
   &__button {
+    width: 150px;
     color: burlywood;
     margin-top: 15px;
     background-color: rgb(128, 43, 43);
+    border-radius: 5px;
   }
 }
 </style>

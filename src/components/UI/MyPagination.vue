@@ -3,11 +3,11 @@
     <div class="pagination__block">
       <button
         @click="click"
-        v-for="n in olNamberofPages"
+        v-for="n in getAllNumberOfPages"
         :key="n"
         class="pagination__button"
         :class="{
-          'current-page': currentPage === n,
+          'current-page': getCurrentNumberOfPage === n,
         }"
       >
         {{ n }}
@@ -17,26 +17,26 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "MyPagination",
-  props: {
-    olNamberofPages: {
-      type: Number,
-      defoult: 1,
-      required: true,
-    },
-  },
 
-  data() {
-    return {
-      currentPage: 1,
-    };
+  computed: {
+    ...mapGetters({
+      getAllNumberOfPages: "expenses/getAllNumberOfPages",
+      getCurrentNumberOfPage: "expenses/getCurrentNumberOfPage",
+    }),
   },
 
   methods: {
+    ...mapMutations({
+      changeCurrentNumberOfPage: "expenses/changeCurrentNumberOfPage",
+      changeShowMainListAndStartList: "expenses/changeShowMainListAndStartList",
+    }),
+
     click(event) {
-      this.currentPage = +event.target.textContent;
-      this.$emit("showPage", event.target.textContent);
+      this.changeCurrentNumberOfPage(+event.target.textContent);
+      this.changeShowMainListAndStartList();
     },
   },
 };

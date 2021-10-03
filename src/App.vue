@@ -1,31 +1,50 @@
 <template>
   <div class="app">
     <calculator v-if="0"></calculator>
+    <router-view />
     <header class="header">
       <h1 class="header__title">My personal expenses</h1>
     </header>
     <div class="My-personal-expenses container">
       <div class="payment-block">
-        <my-button @click="show" class="payment-block__button"
-          >Создать запись расходов</my-button
+        <div class="payment-block__button-block">
+          <my-button @click="showAddForm" class="payment-block__button"
+            >Добавить расходы</my-button
+          >
+
+          <div class="payment-block__fetch-pagination">
+            <h5 class="payment-block__fetch-pagination-title">
+              Подгрузить страницу с сервера
+            </h5>
+            <pagination-2></pagination-2>
+          </div>
+
+          <my-button @click="showAddCategory" class="payment-block__button"
+            >Добавить категории</my-button
+          >
+        </div>
+
+        <router-link :to="{ name: 'AddCostsForm', params: { value } }"
+          ><div class="link">
+            Добавить платеж категории Food с ценой 200
+          </div></router-link
         >
 
         <main>
-          <payments-display
-            :countItem="countItem"
-            :costsList="costsList"
-            :numberOfPage="currentNumberOfPage"
-          ></payments-display>
+          <payments-display></payments-display>
         </main>
 
         <my-pagination
           class="payment-block__paginat"
-          :olNamberofPages="olNamberofPages"
           @showPage="showPage"
         ></my-pagination>
 
-        <my-modal v-model:show="showForm">
-          <add-costs-form @getPaymentForm="getPaymentForm"></add-costs-form>
+        <my-modal v-show="getShowFormAddCosts">
+          <add-costs-form></add-costs-form>
+        </my-modal>
+
+        <my-modal v-show="getShowFormAddCategory">
+          <add-category-form></add-category-form>
         </my-modal>
       </div>
 
@@ -38,140 +57,55 @@
 import Calculator from "@/components/Calculator";
 import AddCostsForm from "@/components/AddCostsForm";
 import PaymentsDisplay from "@/components/PaymentsDisplay";
-import { computed } from "@vue/reactivity";
+// import { computed } from "@vue/reactivity";
+import { mapMutations, mapActions, mapGetters } from "vuex";
+import AddCategoryForm from "@/components/AddCategoryForm.vue";
 
 export default {
   components: {
     Calculator,
     AddCostsForm,
     PaymentsDisplay,
+    AddCategoryForm,
   },
+
   data() {
     return {
-      costsList: [],
-      countItem: 0,
-      showForm: false,
-      currentNumberOfPage: 1,
-      olNamberofPages: computed(() => Math.ceil(this.countItem / 5)),
+      value: 2,
     };
   },
 
   methods: {
-    showPage(number) {
-      this.currentNumberOfPage = +number;
+    ...mapMutations({
+      setCostsListData: "expenses/setCostsListData",
+      addDataToCostssList: "expenses/addDataToCostssList",
+      changeShowFormAddCategory: "expenses/changeShowFormAddCategory",
+      changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
+    }),
+
+    ...mapActions({
+      fetchData: "expenses/fetchData",
+    }),
+
+    showAddForm() {
+      this.changeShowFormAddCosts(true);
     },
 
-    show() {
-      this.showForm = true;
-    },
-
-    getPaymentForm(discription, amount, date) {
-      this.showForm = false;
-      const payment = [
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: date,
-          category: discription,
-          value: amount,
-        },
-      ];
-
-      this.costsList = [...payment, ...this.costsList];
-    },
-
-    fetchData() {
-      return [
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-        {
-          count: ++this.countItem,
-          id: Date.now(),
-          date: "2021-09-14",
-          category: "Транапорт",
-          value: 360,
-        },
-      ];
+    showAddCategory() {
+      this.changeShowFormAddCategory(true);
     },
   },
 
+  computed: {
+    ...mapGetters({
+      getShowFormAddCategory: "expenses/getShowFormAddCategory",
+      getShowFormAddCosts: "expenses/getShowFormAddCosts",
+      getCurrentFetchNumberOfPage: "expenses/getCurrentFetchNumberOfPage",
+    }),
+  },
+
   created() {
-    this.costsList = this.fetchData();
+    this.fetchData();
   },
 };
 </script>
@@ -196,6 +130,10 @@ export default {
   background-color: rgb(35, 44, 44);
   height: 100vh;
   width: 100%;
+}
+
+.link {
+  color: white;
 }
 
 .My-personal-expenses {
@@ -227,6 +165,22 @@ export default {
     display: flex;
     justify-content: center;
     margin: 10px;
+  }
+  &__fetch-pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__fetch-pagination-title {
+    font-size: 16px;
+    color: brown;
+    text-align: center;
+    margin-top: -10px;
+  }
+
+  &__button-block {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__button {
