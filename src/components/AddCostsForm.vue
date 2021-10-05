@@ -3,12 +3,7 @@
     <h3>Введите транзакцию:</h3>
 
     <select v-model="paymentDiscription" class="form-costs__input">
-      <option
-        :selected="option === 'Food'"
-        v-for="option in getCategoryList"
-        :value="option"
-        :key="option"
-      >
+      <option v-for="option in getCategoryList" :value="option" :key="option">
         {{ option }}
       </option>
     </select>
@@ -17,6 +12,7 @@
       class="form-costs__input"
       type="text"
       placeholder="Сумма расхода"
+      autofocus
     />
     <input v-model="paymentDate" class="form-costs__input" type="date" />
     <div class="form-costs__button-block">
@@ -35,7 +31,7 @@ export default {
   data() {
     return {
       paymentDiscription: "",
-      paymentAmount: this.$route.query.value,
+      paymentAmount: "",
       paymentDate: "",
     };
   },
@@ -99,12 +95,19 @@ export default {
     addLeadingZeroInDate(d) {
       return d < 10 ? "0" + d : d;
     },
+
+    autoAddCategoryAndValueInCosts() {
+      this.paymentDiscription = this.$route.name;
+      this.paymentAmount = this.$route.query.value;
+    },
   },
 
   mounted() {
     if (!this.getCategoryList.length) {
       this.loadCategories();
     }
+
+    this.autoAddCategoryAndValueInCosts();
   },
 };
 </script>
