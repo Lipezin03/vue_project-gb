@@ -3,7 +3,12 @@
     <h3>Введите транзакцию:</h3>
 
     <select v-model="paymentDiscription" class="form-costs__input">
-      <option v-for="option in getCategoryList" :value="option" :key="option">
+      <option
+        :selected="option === 'Food'"
+        v-for="option in getCategoryList"
+        :value="option"
+        :key="option"
+      >
         {{ option }}
       </option>
     </select>
@@ -30,7 +35,7 @@ export default {
   data() {
     return {
       paymentDiscription: "",
-      paymentAmount: null,
+      paymentAmount: this.$route.query.value,
       paymentDate: "",
     };
   },
@@ -38,6 +43,7 @@ export default {
   computed: {
     ...mapGetters({
       getCategoryList: "expenses/getCategoryList",
+      getShowFormAddCosts: "expenses/getShowFormAddCosts",
     }),
 
     getDate() {
@@ -76,8 +82,14 @@ export default {
           value: this.paymentAmount,
         },
       ];
+
       this.addDataToCostssList(payment);
-      this.changeShowFormAddCosts(false);
+
+      if (!this.getShowFormAddCosts) {
+        this.$router.push("/");
+      } else {
+        this.changeShowFormAddCosts(false);
+      }
 
       this.paymentDiscription = "";
       this.paymentAmount = null;

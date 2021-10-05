@@ -5,9 +5,15 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 export default {
   name: "MyModal",
+
+  computed: {
+    ...mapGetters({
+      getShowFormAddCosts: "expenses/getShowFormAddCosts",
+    }),
+  },
 
   methods: {
     ...mapMutations({
@@ -16,8 +22,12 @@ export default {
     }),
 
     hidenModal() {
+      if (!this.getShowFormAddCosts) {
+        this.$router.push("/");
+      } else {
+        this.changeShowFormAddCosts(false);
+      }
       this.changeShowFormAddCategory(false);
-      this.changeShowFormAddCosts(false);
     },
   },
 };

@@ -1,6 +1,7 @@
-// import AddCosts from "@/pages/AddCosts"
+
 import AddCostsAuto from "@/pages/AddCostsAuto"
-// import Page404 from "@/pages/Page404"
+import Main from "@/pages/Main"
+import Page404 from "@/pages/Page404"
 
 import { createRouter } from "vue-router"
 import { createWebHashHistory } from "vue-router"
@@ -9,21 +10,37 @@ import { createWebHashHistory } from "vue-router"
 
 
 const routes = [
+
+
     {
-        path: "/add/payment/Food?value=:value",
-        name: "AddCostsAuto",
-        component: AddCostsAuto
+        path: "/",
+        name: "Main",
+        component: Main,
+        children: [
+            {
+                path: "/add/payment/Food",
+                name: "Food",
+                component: AddCostsAuto
+            },
+            {
+                path: "/add/payment/Transport",
+                name: "Transport",
+                component: AddCostsAuto
+            },
+            {
+                path: "/add/payment/Entertainment",
+                name: "Entertainment",
+                component: AddCostsAuto
+            },
+        ]
     },
 
 
-
-    // Почему не работает при этом знаке "*" Я сделал как в метедиче??
-
-    // {
-    //     path: '*',
-    //     name: "Page404",
-    //     component: Page404
-    // },
+    {
+        path: '/:pathMatch(.*)*',
+        name: "Page404",
+        component: Page404
+    },
 
 
 

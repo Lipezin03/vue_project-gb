@@ -22,6 +22,11 @@ export default {
 
         classIsActivInPagination2: 0,
 
+
+        autoCostsFood: 200,
+        autoCostsTransport: 50,
+        autoCostsEntertainment: 2000,
+
     },
 
     getters: {
@@ -87,7 +92,19 @@ export default {
 
         getClassIsActivInPagination2(state) {
             return state.classIsActivInPagination2
-        }
+        },
+
+
+        getAutoCostsFood(state) {
+            return state.autoCostsFood;
+        },
+        getAutoCostsTransport(state) {
+            return state.autoCostsTransport;
+        },
+        getAutoCostsEntertainment(state) {
+            return state.autoCostsEntertainment;
+        },
+
 
     },
 
