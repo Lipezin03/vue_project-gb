@@ -63,6 +63,10 @@
         </my-modal>
       </div>
 
+      <my-modal v-show="getShowFormCangeItemInCosts">
+        <form-change-item-in-costs></form-change-item-in-costs>
+      </my-modal>
+
       <div class="schedule">Сдесь дальше по заданию будет график</div>
     </div>
   </div>
@@ -74,12 +78,18 @@ import PaymentsDisplay from "@/components/PaymentsDisplay";
 // import { computed } from "@vue/reactivity";
 import { mapMutations, mapActions, mapGetters } from "vuex";
 import AddCategoryForm from "@/components/AddCategoryForm.vue";
+import Pagination2 from "@/components/Pagination2";
+import MyPagination from "@/components/MyPagination";
+import FormChangeItemInCosts from "@/components/FormChangeItemInCosts.vue";
 
 export default {
   components: {
     AddCostsForm,
     PaymentsDisplay,
     AddCategoryForm,
+    Pagination2,
+    MyPagination,
+    FormChangeItemInCosts,
   },
 
   data() {
@@ -120,6 +130,7 @@ export default {
     ...mapGetters({
       getShowFormAddCategory: "expenses/getShowFormAddCategory",
       getShowFormAddCosts: "expenses/getShowFormAddCosts",
+      getShowFormCangeItemInCosts: "expenses/getShowFormCangeItemInCosts",
       getCurrentFetchNumberOfPage: "expenses/getCurrentFetchNumberOfPage",
       getAutoCostsEntertainment: "expenses/getAutoCostsEntertainment",
       getAutoCostsTransport: "expenses/getAutoCostsTransport",
@@ -190,7 +201,7 @@ export default {
 }
 
 .payment-block {
-  width: 50%;
+  width: 60%;
   &__paginat {
     display: flex;
     justify-content: center;

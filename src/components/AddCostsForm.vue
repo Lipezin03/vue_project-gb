@@ -61,7 +61,7 @@ export default {
     }),
 
     ...mapMutations({
-      addDataToCostssList: "expenses/addDataToCostssList",
+      addDataToCostsList: "expenses/addDataToCostsList",
       changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
     }),
 
@@ -76,10 +76,11 @@ export default {
           date: this.getDate,
           category: this.paymentDiscription,
           value: this.paymentAmount,
+          show: false,
         },
       ];
 
-      this.addDataToCostssList(payment);
+      this.addDataToCostsList(payment);
 
       if (!this.getShowFormAddCosts) {
         this.$router.push("/");

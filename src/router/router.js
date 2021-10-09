@@ -32,6 +32,12 @@ const routes = [
                 name: "Entertainment",
                 component: AddCostsAuto
             },
+
+            {
+                path: '/:pathMatch(.*)*',
+                name: "Page404",
+                component: Page404
+            },
         ]
     },
 

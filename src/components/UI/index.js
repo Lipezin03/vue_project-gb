@@ -1,12 +1,10 @@
 import Mybutton from "@/components/UI/MyButton"
-import MyPagination from "@/components/UI/MyPagination"
 import MyModal from "@/components/UI/MyModal"
-import Pagination2 from "@/components/UI/Pagination2"
+import MyContextMenuBox from "@/components/UI/MyContextMenuBox"
 
 export default [
     Mybutton,
-    MyPagination,
     MyModal,
-    Pagination2,
+    MyContextMenuBox
 
 ]

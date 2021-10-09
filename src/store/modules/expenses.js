@@ -10,12 +10,18 @@ export default {
         endListShow: 5,
         showCurrentList: [],
 
+        itemChangingInCosts: [],
+
         currentNumberOfPage: 1,
 
         categoryList: [],
 
+
         showFormAddCosts: false,
         showFormAddCategory: false,
+        showFormCangeItemInCosts: false,
+
+
 
         allFetchPage: 0,
         currentFetchNumberOfPage: 1,
@@ -76,6 +82,10 @@ export default {
         getShowFormAddCosts(state) {
             return state.showFormAddCosts;
         },
+        getShowFormCangeItemInCosts(state) {
+            return state.showFormCangeItemInCosts;
+        },
+
 
 
 
@@ -118,14 +128,26 @@ export default {
             }
             state.costsList = [...data, ...state.costsList];
         },
-
-        addDataToCostssList(state, data) {
+        addDataToCostsList(state, data) {
             state.costsList = [...data, ...state.costsList]
         },
+        deleteCostsInCostsList(state, data) {
+            state.costsList = state.costsList.filter(el => {
+                return el.id !== data.id
+            })
+        },
+        cangeItemImCosts(state, data) {
+            let currentItem = state.itemChangingInCosts;
+            let newData = data;
+            Object.assign(currentItem, newData)
+        },
+
+
 
         changeCurrentNumberOfPage(state, data) {
             state.currentNumberOfPage = data;
         },
+
 
         changeShowMainListAndStartList(state) {
             state.endListShow = 5;
@@ -153,20 +175,29 @@ export default {
         changeShowFormAddCategory(state, data) {
             state.showFormAddCategory = data;
         },
-
         changeShowFormAddCosts(state, data) {
             state.showFormAddCosts = data;
         },
+        cangeShowFormCangeItemInCosts(state, data) {
+            state.showFormCangeItemInCosts = data;
+        },
+
 
 
 
         setAllFetchPage(state, data) {
             state.allFetchPage = data.length;
         },
-
         setFetchPage(state, data) {
             state.currentFetchNumberOfPage = data;
         },
+
+
+
+        addItemChangingToCosts(state, data) {
+            state.itemChangingInCosts = data;
+        },
+
 
 
         cangeClassIsActivInPagination2(state, data) {
@@ -184,19 +215,19 @@ export default {
                         {
 
                             "page1": [
-                                { "id": 1, "date": "2021-09-23", "category": "Food", "value": 169 },
-                                { "id": 2, "date": "2021-08-22", "category": "Navigation", "value": 50 },
-                                { "id": 3, "date": "2021-07-21", "category": "Sport", "value": 450 }
+                                { "id": 1, "date": "2021-09-23", "category": "Food", show: false, "value": 169 },
+                                { "id": 2, "date": "2021-08-22", "category": "Navigation", show: false, "value": 50 },
+                                { "id": 3, "date": "2021-07-21", "category": "Sport", show: false, "value": 450 }
                             ],
                             "page2": [
-                                { "id": 4, "date": "2021-06-19", "category": "Entertaiment", "value": 969 },
-                                { "id": 5, "date": "2021-05-16", "category": "Education", "value": 1500 },
-                                { "id": 6, "date": "2021-04-03", "category": "Food", "value": 200 }
+                                { "id": 4, "date": "2021-06-19", "category": "Entertaiment", show: false, "value": 969 },
+                                { "id": 5, "date": "2021-05-16", "category": "Education", show: false, "value": 1500 },
+                                { "id": 6, "date": "2021-04-03", "category": "Food", show: false, "value": 200 }
                             ],
                             "page3": [
-                                { "id": 7, "date": "2021-06-04", "category": "Entertaiment", "value": 969 },
-                                { "id": 8, "date": "2020-11-10", "category": "Education", "value": 1500 },
-                                { "id": 9, "date": "2020-11-03", "category": "Food", "value": 200 }
+                                { "id": 7, "date": "2021-06-04", "category": "Entertaiment", show: false, "value": 969 },
+                                { "id": 8, "date": "2020-11-10", "category": "Education", show: false, "value": 1500 },
+                                { "id": 9, "date": "2020-11-03", "category": "Food", show: false, "value": 200 }
                             ],
                         }
 

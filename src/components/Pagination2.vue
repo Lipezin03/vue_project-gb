@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script>
+ <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "Pagination2",
@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+ <style lang="scss" scoped>
 .pagination2 {
   width: 100%;
   padding-right: 10px;
@@ -66,8 +66,8 @@ export default {
   }
   &__button {
     display: inline-block;
-    // display: block;
-    // margin: auto;
+    //     // display: block;
+    //     // margin: auto;
     padding: 5px;
     width: 50px;
     background: rgb(75, 34, 34);

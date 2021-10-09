@@ -19,6 +19,7 @@ export default {
     ...mapMutations({
       changeShowFormAddCategory: "expenses/changeShowFormAddCategory",
       changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
+      cangeShowFormCangeItemInCosts: "expenses/cangeShowFormCangeItemInCosts",
     }),
 
     hidenModal() {
@@ -28,6 +29,7 @@ export default {
         this.changeShowFormAddCosts(false);
       }
       this.changeShowFormAddCategory(false);
+      this.cangeShowFormCangeItemInCosts(false);
     },
   },
 };
@@ -36,6 +38,7 @@ export default {
 <style lang="scss" scoped>
 .modal-block {
   position: fixed;
+  z-index: 5;
   top: 0;
   bottom: 0;
   right: 0;
