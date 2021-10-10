@@ -19,7 +19,8 @@ export default {
 
         showFormAddCosts: false,
         showFormAddCategory: false,
-        showFormCangeItemInCosts: false,
+        showFormChangeItemInCosts: false,
+        showContextMenu: false,
 
 
 
@@ -32,6 +33,8 @@ export default {
         autoCostsFood: 200,
         autoCostsTransport: 50,
         autoCostsEntertainment: 2000,
+
+
 
     },
 
@@ -78,14 +81,15 @@ export default {
         getShowFormAddCategory(state) {
             return state.showFormAddCategory;
         },
-
         getShowFormAddCosts(state) {
             return state.showFormAddCosts;
         },
-        getShowFormCangeItemInCosts(state) {
-            return state.showFormCangeItemInCosts;
+        getShowFormChangeItemInCosts(state) {
+            return state.showFormChangeItemInCosts;
         },
-
+        getShowContextMenu(state) {
+            return state.showContextMenu;
+        },
 
 
 
@@ -103,6 +107,7 @@ export default {
         getClassIsActivInPagination2(state) {
             return state.classIsActivInPagination2
         },
+
 
 
         getAutoCostsFood(state) {
@@ -144,9 +149,11 @@ export default {
 
 
 
+
         changeCurrentNumberOfPage(state, data) {
             state.currentNumberOfPage = data;
         },
+
 
 
         changeShowMainListAndStartList(state) {
@@ -178,8 +185,11 @@ export default {
         changeShowFormAddCosts(state, data) {
             state.showFormAddCosts = data;
         },
-        cangeShowFormCangeItemInCosts(state, data) {
-            state.showFormCangeItemInCosts = data;
+        changeShowFormChangeItemInCosts(state, data) {
+            state.showFormChangeItemInCosts = data;
+        },
+        changeShowContextMenu(state, data) {
+            state.showContextMenu = data
         },
 
 
@@ -215,19 +225,19 @@ export default {
                         {
 
                             "page1": [
-                                { "id": 1, "date": "2021-09-23", "category": "Food", show: false, "value": 169 },
-                                { "id": 2, "date": "2021-08-22", "category": "Navigation", show: false, "value": 50 },
-                                { "id": 3, "date": "2021-07-21", "category": "Sport", show: false, "value": 450 }
+                                { "id": 1, "date": "2021-09-23", "category": "Food", "value": 169 },
+                                { "id": 2, "date": "2021-08-22", "category": "Navigation", "value": 50 },
+                                { "id": 3, "date": "2021-07-21", "category": "Sport", "value": 450 }
                             ],
                             "page2": [
-                                { "id": 4, "date": "2021-06-19", "category": "Entertaiment", show: false, "value": 969 },
-                                { "id": 5, "date": "2021-05-16", "category": "Education", show: false, "value": 1500 },
-                                { "id": 6, "date": "2021-04-03", "category": "Food", show: false, "value": 200 }
+                                { "id": 4, "date": "2021-06-19", "category": "Entertaiment", "value": 969 },
+                                { "id": 5, "date": "2021-05-16", "category": "Education", "value": 1500 },
+                                { "id": 6, "date": "2021-04-03", "category": "Food", "value": 200 }
                             ],
                             "page3": [
-                                { "id": 7, "date": "2021-06-04", "category": "Entertaiment", show: false, "value": 969 },
-                                { "id": 8, "date": "2020-11-10", "category": "Education", show: false, "value": 1500 },
-                                { "id": 9, "date": "2020-11-03", "category": "Food", show: false, "value": 200 }
+                                { "id": 7, "date": "2021-06-04", "category": "Entertaiment", "value": 969 },
+                                { "id": 8, "date": "2020-11-10", "category": "Education", "value": 1500 },
+                                { "id": 9, "date": "2020-11-03", "category": "Food", "value": 200 }
                             ],
                         }
 

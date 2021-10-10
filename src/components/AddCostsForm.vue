@@ -76,7 +76,6 @@ export default {
           date: this.getDate,
           category: this.paymentDiscription,
           value: this.paymentAmount,
-          show: false,
         },
       ];
 

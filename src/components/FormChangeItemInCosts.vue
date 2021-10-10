@@ -37,12 +37,15 @@ export default {
   methods: {
     ...mapMutations({
       cangeItemImCosts: "expenses/cangeItemImCosts",
-      cangeShowFormCangeItemInCosts: "expenses/cangeShowFormCangeItemInCosts",
+      changeShowContextMenu: "expenses/changeShowContextMenu",
+      changeShowFormChangeItemInCosts:
+        "expenses/changeShowFormChangeItemInCosts",
     }),
 
     cangeItemInCosts() {
       if (this.newValue === "" && this.newCategore === "") {
-        this.cangeShowFormCangeItemInCosts(false);
+        this.changeShowContextMenu(false);
+        this.changeShowFormChangeItemInCosts(false);
         return;
       } else if (this.newValue === "") {
         const newCosts = {
@@ -64,8 +67,8 @@ export default {
 
       this.newValue = "";
       this.newCategore = "";
-
-      this.cangeShowFormCangeItemInCosts(false);
+      this.changeShowContextMenu(false);
+      this.changeShowFormChangeItemInCosts(false);
     },
   },
 };

@@ -33,18 +33,18 @@
                     if (el) divContextMenu[i] = { [i]: false };
                   }
                 "
-                @click="showContextMenu(el, getShowCurrentList)"
+                @click="showContextMenu(el)"
                 class="payments-display__context-menu-box"
               >
                 <div
                   @click="closeContextMenu(el)"
                   @click.stop
-                  v-if="el.show"
+                  v-if="el.id === getShowContextMenu"
                   class="payments-display__context-menu-close"
                 ></div>
                 <transition name="animation-memu">
                   <my-context-menu-box
-                    v-if="el.show"
+                    v-if="el.id === getShowContextMenu"
                     class="payments-display__context-menu-box-menu"
                   >
                     <my-button
@@ -100,27 +100,24 @@ export default {
   name: "PaymentsDisplay",
   data() {
     return {
-      divContextMenu: [],
+      divContextMenu: [], // Этот пример я оставил для себя
     };
   },
 
   methods: {
     ...mapMutations({
       deleteCostsInCostsList: "expenses/deleteCostsInCostsList",
-      cangeShowFormCangeItemInCosts: "expenses/cangeShowFormCangeItemInCosts",
+      changeShowFormChangeItemInCosts:
+        "expenses/changeShowFormChangeItemInCosts",
       addItemChangingToCosts: "expenses/addItemChangingToCosts",
+      changeShowContextMenu: "expenses/changeShowContextMenu",
     }),
 
-    showContextMenu(item, arr) {
-      arr.forEach((el) => {
-        if (el.show === true) {
-          el.show = false;
-        }
-      });
-      item.show = true;
+    showContextMenu(item) {
+      this.changeShowContextMenu(item.id);
     },
-    closeContextMenu(el) {
-      el.show = false;
+    closeContextMenu() {
+      this.changeShowContextMenu(false);
     },
 
     delCosts(costs) {
@@ -128,7 +125,7 @@ export default {
     },
 
     cangeCosts(costs) {
-      this.cangeShowFormCangeItemInCosts(true);
+      this.changeShowFormChangeItemInCosts(true);
       this.addItemChangingToCosts(costs);
     },
   },
@@ -138,6 +135,7 @@ export default {
       getCostsLength: "expenses/getCostsLength",
       getShowCurrentList: "expenses/getShowCurrentList",
       getStartListShow: "expenses/getStartListShow",
+      getShowContextMenu: "expenses/getShowContextMenu",
     }),
   },
 };

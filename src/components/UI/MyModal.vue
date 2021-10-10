@@ -19,7 +19,8 @@ export default {
     ...mapMutations({
       changeShowFormAddCategory: "expenses/changeShowFormAddCategory",
       changeShowFormAddCosts: "expenses/changeShowFormAddCosts",
-      cangeShowFormCangeItemInCosts: "expenses/cangeShowFormCangeItemInCosts",
+      changeShowFormChangeItemInCosts:
+        "expenses/changeShowFormChangeItemInCosts",
     }),
 
     hidenModal() {
@@ -29,7 +30,7 @@ export default {
         this.changeShowFormAddCosts(false);
       }
       this.changeShowFormAddCategory(false);
-      this.cangeShowFormCangeItemInCosts(false);
+      this.changeShowFormChangeItemInCosts(false);
     },
   },
 };

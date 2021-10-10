@@ -63,7 +63,7 @@
         </my-modal>
       </div>
 
-      <my-modal v-show="getShowFormCangeItemInCosts">
+      <my-modal v-show="getShowFormChangeItemInCosts">
         <form-change-item-in-costs></form-change-item-in-costs>
       </my-modal>
 
@@ -130,7 +130,7 @@ export default {
     ...mapGetters({
       getShowFormAddCategory: "expenses/getShowFormAddCategory",
       getShowFormAddCosts: "expenses/getShowFormAddCosts",
-      getShowFormCangeItemInCosts: "expenses/getShowFormCangeItemInCosts",
+      getShowFormChangeItemInCosts: "expenses/getShowFormChangeItemInCosts",
       getCurrentFetchNumberOfPage: "expenses/getCurrentFetchNumberOfPage",
       getAutoCostsEntertainment: "expenses/getAutoCostsEntertainment",
       getAutoCostsTransport: "expenses/getAutoCostsTransport",
@@ -159,7 +159,6 @@ export default {
 
 .My-personal-expenses {
   display: flex;
-  // padding-bottom: 150px;
   justify-content: space-between;
   align-items: center;
 }
@@ -174,9 +173,6 @@ export default {
   height: 83px;
   background-color: rgb(48, 13, 13);
   box-shadow: 0 0px 10px 2px rgb(29, 27, 27);
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
 
   &__title {
     text-align: center;
