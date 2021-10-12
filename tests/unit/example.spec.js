@@ -1,9 +1,8 @@
-// import { shallowMount } from '@vue/test-utils'
-// import HelloWorld from '@/components/HelloWorld.vue'
 import { mount } from "@vue/test-utils"
 import Calculator from "@/components/Calculator"
 
 describe('Calculator tests', () => {
+
   it('Тест поля ввода для operand1', () => {
 
     const wrapper = mount(Calculator);
