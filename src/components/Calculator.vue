@@ -10,12 +10,14 @@
             class="calculator__input"
             placeholder="Введите первое число"
             type="text"
+            name="operand1"
           />
           <input
             v-model.number="operand2"
             class="calculator__input"
             placeholder="Введите второе число или возвести в Cтепень"
             type="text"
+            name="operand2"
           />
         </div>
 
@@ -25,6 +27,7 @@
             :key="el"
             @click="getResult(el)"
             class="calculator__button"
+            :name="el"
           >
             {{ el }}
           </button>
@@ -53,6 +56,7 @@
               v-for="item in virtKeyboardBtn"
               :key="item"
               class="virtual-keyboard__button"
+              :name="item"
             >
               {{ item }}
             </button>
@@ -60,6 +64,7 @@
             <button
               @click="deleteSymbolOnKeyboard"
               class="virtual-keyboard__button"
+              name="Удалить"
             >
               Удалить
             </button>
@@ -71,7 +76,7 @@
                 checked
                 id="radio1"
                 class="virtual-keyboard__radio-block-input"
-                name="position"
+                name="position1"
                 value="writeOperand1"
               />
               <label for="radio1" class="virtual-keyboard__radio-block-label">
@@ -82,7 +87,7 @@
                 type="radio"
                 id="radio2"
                 class="virtual-keyboard__radio-block-input"
-                name="position"
+                name="position2"
                 value="writeOperand2"
               />
               <label for="radio2" class="virtual-keyboard__radio-block-label">
