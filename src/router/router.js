@@ -41,6 +41,12 @@ const routes = [
         ]
     },
 
+    {
+        path: '/Calculator',
+        name: "Calculator",
+        component: () => import("@/components/Calculator")
+    },
+
 
     {
         path: '/:pathMatch(.*)*',

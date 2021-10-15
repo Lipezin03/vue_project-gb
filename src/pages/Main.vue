@@ -25,6 +25,15 @@
           Entertainment с ценой 2000
         </p>
       </div>
+
+      <div class="block-btn-show-calculator">
+        <my-button
+          @click="showCalculator"
+          class="block-btn-show-calculator__btn"
+        >
+          Калькулятор
+        </my-button>
+      </div>
     </header>
     <div class="My-personal-expenses container">
       <div class="payment-block">
@@ -67,7 +76,7 @@
         <form-change-item-in-costs></form-change-item-in-costs>
       </my-modal>
 
-      <div class="schedule">Сдесь дальше по заданию будет график</div>
+      <div class="schedule">Здесь дальше по заданию будет график</div>
     </div>
   </div>
 </template>
@@ -116,6 +125,10 @@ export default {
     ...mapActions({
       fetchData: "expenses/fetchData",
     }),
+
+    showCalculator() {
+      this.$router.push({ name: "Calculator" });
+    },
 
     showAddForm() {
       this.changeShowFormAddCosts(true);
@@ -180,9 +193,17 @@ export default {
     color: rgb(105, 90, 66);
   }
 }
+
+.block-btn-show-calculator {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+}
+
 .block-auto-costs {
-  position: relative;
-  top: -58px;
+  position: absolute;
+  top: -1px;
+  left: 20px;
 
   &__title {
     color: rgb(92, 86, 75);
