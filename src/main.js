@@ -3,7 +3,7 @@ import App from './App.vue'
 import components from "@/components/UI"
 import store from "@/store"
 import router from '@/router/router'
-import plaginMyContextMenu from '@/plagins/plaginMyContextMenu'
+import pluginMyContextMenu from '@/plugins/pluginMyContextMenu'
 
 const app = createApp(App);
 
@@ -12,7 +12,7 @@ components.forEach(comp => {
 })
 
 app
-    .use(plaginMyContextMenu)
+    .use(pluginMyContextMenu)
     .use(router)
     .use(store)
     .mount('#app')
