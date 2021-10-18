@@ -5,6 +5,7 @@ import store from "@/store"
 import router from '@/router/router'
 import pluginMyContextMenu from '@/plugins/pluginMyContextMenu'
 
+
 const app = createApp(App);
 
 components.forEach(comp => {

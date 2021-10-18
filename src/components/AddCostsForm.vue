@@ -14,6 +14,7 @@
       placeholder="Сумма расхода"
       autofocus
     />
+    <div v-show="messageError">Введите сумму цифрами</div>
     <input v-model="paymentDate" class="form-costs__input" type="date" />
     <div class="form-costs__button-block">
       <my-button class="form-costs__button">Создать запись</my-button>
@@ -23,16 +24,15 @@
 
 
 <script>
-import MyButton from "./UI/MyButton.vue";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
-  components: { MyButton },
   name: "AddCostsForm",
   data() {
     return {
       paymentDiscription: "",
       paymentAmount: "",
       paymentDate: "",
+      messageError: false,
     };
   },
 
@@ -75,7 +75,7 @@ export default {
           id: Date.now(),
           date: this.getDate,
           category: this.paymentDiscription,
-          value: this.paymentAmount,
+          value: +this.paymentAmount,
         },
       ];
 

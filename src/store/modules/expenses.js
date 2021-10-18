@@ -104,10 +104,6 @@ export default {
 
 
 
-        getClassIsActivInPagination2(state) {
-            return state.classIsActivInPagination2
-        },
-
 
 
         getAutoCostsFood(state) {
@@ -118,6 +114,33 @@ export default {
         },
         getAutoCostsEntertainment(state) {
             return state.autoCostsEntertainment;
+        },
+
+
+        getStatisticsOfExpenses(state) {
+            const set = new Set;
+
+            state.costsList.forEach(el => {
+                set.add(el.category)
+            })
+
+            const statistic = [];
+
+            set.forEach(item => {
+                const itemStatistic = {
+                    name: item,
+                    y: 0
+                }
+
+                state.costsList.forEach(el => {
+                    if (item === el.category) {
+                        itemStatistic.y += el.value
+                    }
+                })
+                statistic.push(itemStatistic)
+            })
+
+            return statistic
         },
 
 

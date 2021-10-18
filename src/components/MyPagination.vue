@@ -63,6 +63,9 @@ export default {
     background: rgb(75, 34, 34);
   }
   &__button:hover {
+    transition: 0.3s;
+    transform: scale(1.02);
+    box-shadow: 1px 2px 10px rgba(63, 171, 179, 0.2);
     cursor: pointer;
   }
 }

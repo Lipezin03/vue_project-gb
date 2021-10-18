@@ -76,7 +76,9 @@
         <form-change-item-in-costs></form-change-item-in-costs>
       </my-modal>
 
-      <div class="schedule">Здесь дальше по заданию будет график</div>
+      <div class="schedule">
+        <my-highcharts v-if="getStatisticsOfExpenses" class="highcharts" />
+      </div>
     </div>
   </div>
 </template>
@@ -90,6 +92,7 @@ import AddCategoryForm from "@/components/AddCategoryForm.vue";
 import Pagination2 from "@/components/Pagination2";
 import MyPagination from "@/components/MyPagination";
 import FormChangeItemInCosts from "@/components/FormChangeItemInCosts.vue";
+import MyHighcharts from "@/components/MyHighcharts";
 
 export default {
   components: {
@@ -99,6 +102,7 @@ export default {
     Pagination2,
     MyPagination,
     FormChangeItemInCosts,
+    MyHighcharts,
   },
 
   data() {
@@ -148,6 +152,7 @@ export default {
       getAutoCostsEntertainment: "expenses/getAutoCostsEntertainment",
       getAutoCostsTransport: "expenses/getAutoCostsTransport",
       getAutoCostsFood: "expenses/getAutoCostsFood",
+      getStatisticsOfExpenses: "expenses/getStatisticsOfExpenses",
     }),
   },
 
@@ -164,6 +169,7 @@ export default {
   padding: 0 10px;
   margin: 0 auto;
 }
+
 .app {
   background-color: rgb(35, 44, 44);
   height: 100vh;
@@ -179,18 +185,22 @@ export default {
 .schedule {
   color: rgb(129, 71, 71);
   font-size: 30px;
+  width: 45%;
+  color: #0b6e80;
 }
 
 .header {
   width: 100%;
   height: 83px;
   background-color: rgb(48, 13, 13);
-  box-shadow: 0 0px 10px 2px rgb(29, 27, 27);
+  background-color: rgb(15, 15, 15);
+  // box-shadow: 0 0px 10px 2px rgb(29, 27, 27);
 
   &__title {
     text-align: center;
     padding-top: 20px;
-    color: rgb(105, 90, 66);
+    color: rgb(100, 78, 45);
+    color: burlywood;
   }
 }
 
@@ -218,7 +228,7 @@ export default {
 }
 
 .payment-block {
-  width: 60%;
+  width: 55%;
   &__paginat {
     display: flex;
     justify-content: center;
@@ -231,7 +241,8 @@ export default {
   }
   &__fetch-pagination-title {
     font-size: 16px;
-    color: brown;
+    color: #aa4643;
+    color: rgb(117, 101, 72);
     text-align: center;
     margin-top: -10px;
   }
@@ -239,6 +250,8 @@ export default {
   &__button-block {
     display: flex;
     justify-content: space-between;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   &__button {
@@ -263,6 +276,10 @@ export default {
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .schedule {
+    width: 100%;
   }
 }
 </style>

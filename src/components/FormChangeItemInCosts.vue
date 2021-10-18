@@ -54,7 +54,7 @@ export default {
         this.cangeItemImCosts(newCosts);
       } else if (this.newCategore === "") {
         const newCosts = {
-          value: this.newValue,
+          value: +this.newValue,
         };
         this.cangeItemImCosts(newCosts);
       } else {

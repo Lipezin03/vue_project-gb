@@ -7,7 +7,6 @@
           v-for="n in getAllFetchPage"
           :key="n"
           class="pagination2__button"
-          :class="{ active: getClassIsActivInPagination2 === n }"
         >
           {{ n }}
         </button>
@@ -40,6 +39,7 @@ export default {
     }),
 
     click(event) {
+      event.target.classList.add("active");
       this.setFetchPage(event.target.textContent);
       this.cangeClassIsActivInPagination2(+event.target.textContent);
       this.fetchData(event.target.textContent);
@@ -71,10 +71,15 @@ export default {
     padding: 5px;
     width: 50px;
     background: rgb(75, 34, 34);
-    margin-left: 5px;
+    margin-left: 7px;
+    border-radius: 60%;
+    transition: 0.3s;
   }
   &__button:hover {
     cursor: pointer;
+    transition: 0.3s;
+    transform: scale(1.02);
+    box-shadow: 1px 2px 10px rgba(63, 171, 179, 0.2);
   }
 }
 
