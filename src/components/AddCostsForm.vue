@@ -14,7 +14,7 @@
       placeholder="Сумма расхода"
       autofocus
     />
-    <div v-show="messageError">Введите сумму цифрами</div>
+
     <input v-model="paymentDate" class="form-costs__input" type="date" />
     <div class="form-costs__button-block">
       <my-button class="form-costs__button">Создать запись</my-button>
@@ -32,7 +32,6 @@ export default {
       paymentDiscription: "",
       paymentAmount: "",
       paymentDate: "",
-      messageError: false,
     };
   },
 
