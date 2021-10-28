@@ -1,6 +1,7 @@
 <template>
   <div class="app">
-    <calculator></calculator>
+    <calculator v-if="0"></calculator>
+    <router-view />
   </div>
 </template>
 
@@ -8,9 +9,12 @@
 import Calculator from "@/components/Calculator";
 
 export default {
-  components: { Calculator },
+  components: {
+    Calculator,
+  },
 };
 </script>
+
 
 <style lang="scss">
 *,
@@ -20,10 +24,6 @@ export default {
   padding: 0;
   margin: 0;
   border: 0;
-}
-
-.app {
-  padding: 20px;
 }
 </style>
 
